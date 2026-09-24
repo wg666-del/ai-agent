@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-project
+
+# 服务端口（默认 8080；被占用时改这里，如 8081）
+server:
+  port: 8080
