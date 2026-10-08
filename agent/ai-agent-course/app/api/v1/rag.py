@@ -6,6 +6,7 @@ from app.services.rag_service import query_rag
 
 router = APIRouter()
 
+
 @router.post("/rag/query", response_model=ApiResponse[RAGQueryResponse])
 async def rag_query(
     request: RAGQueryRequest,

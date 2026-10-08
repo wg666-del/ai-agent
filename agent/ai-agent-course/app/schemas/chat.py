@@ -3,6 +3,8 @@ from typing import Any
 
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 
+from app.core.config import settings
+
 class MessageRole(str, Enum):
     SYSTEM = "system"
     USER = "user"
@@ -29,20 +31,24 @@ class SourceDocument(BaseModel):
 class ChatRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    messages: list[ChatMessage] = Field(..., min_length=1, description="对话消息列表")
+    messages: list[ChatMessage] = Field(
+        ...,
+        min_length=1,
+        description="对话消息列表"
+    )
     model: str = Field(default="deepseek-chat", description="模型名称")
     temperature: float = Field(default=0.7, ge=0, le=2, description="模型温度")
-    stream: bool = Field(default=False, description="是否启用流式输出")
-    session_id: str | None = Field(default=None, description="会话 ID，用于上下文管理")
-    user_id: str | None = Field(default=None, description="用户 ID，用于个性化推荐和分析")
+    stream: bool = Field(default=False, description="是否流式输出")
+    session_id: str | None = Field(default=None, description="会话 ID")
+    user_id: str | None = Field(default=None, description="用户 ID")
     metadata: dict[str, Any] = Field(default_factory=dict, description="扩展元数据")
 
     @field_validator("model")
     @classmethod
     def validate_model(cls, value: str) -> str:
-        supported_models = ["deepseek-chat", "qwen-plus", "gpt-4o-mini"]
-        if value not in supported_models:
+        if value not in settings.supported_model_list:
             raise ValueError(f"不支持的模型：{value}")
+
         return value
 
 class ChatResponse(BaseModel):

@@ -1,6 +1,11 @@
-from fastapi import APIRouter, Path, Query, Body
+from fastapi import APIRouter, Path, Query
 
-from app.schemas.chat import ChatRequest, ChatResponse, GenerateTitleRequest, GenerateTitleResponse
+from app.schemas.chat import (
+    ChatRequest,
+    ChatResponse,
+    GenerateTitleRequest,
+    GenerateTitleResponse,
+)
 from app.schemas.response import ApiResponse
 from app.services.chat_service import chat_with_ai
 
@@ -14,6 +19,7 @@ async def chat(request: ChatRequest) -> ApiResponse[ChatResponse]:
     return ApiResponse[ChatResponse](
         data=result
     )
+
 
 @router.post("/conversations/{conversation_id}/chat", response_model=ApiResponse[ChatResponse])
 async def chat_in_conversation(
@@ -31,6 +37,7 @@ async def chat_in_conversation(
     return ApiResponse[ChatResponse](
         data=result
     )
+
 
 @router.post("/chat/title", response_model=ApiResponse[GenerateTitleResponse])
 async def generate_chat_title(

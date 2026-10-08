@@ -1,28 +1,29 @@
 from fastapi import APIRouter, Path
 
 from app.schemas.conversation import (
-  ConversationCreateRequest,
-  ConversationMessagesResponse,
-  ConversationResponse
+    ConversationCreateRequest,
+    ConversationMessagesResponse,
+    ConversationResponse,
 )
 from app.schemas.response import ApiResponse
-
 from app.services.conversation_service import (
-  create_conversation,
-  get_conversation_messages
+    create_conversation,
+    get_conversation_messages,
 )
 
 router = APIRouter()
 
+
 @router.post("/conversations", response_model=ApiResponse[ConversationResponse])
 async def create_new_conversation(
-  request: ConversationCreateRequest,
+    request: ConversationCreateRequest,
 ) -> ApiResponse[ConversationResponse]:
-  result = await create_conversation(request)
+    result = await create_conversation(request)
 
-  return ApiResponse[ConversationResponse](
-    data=result
-  )
+    return ApiResponse[ConversationResponse](
+        data=result
+    )
+
 
 @router.get(
     "/conversations/{conversation_id}/messages",

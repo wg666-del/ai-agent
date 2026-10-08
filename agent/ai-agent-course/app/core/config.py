@@ -19,7 +19,7 @@ class Settings(BaseSettings):
   )
 
   @property
-  def supported_models_list(self) -> list[str]:
+  def supported_model_list(self) -> list[str]:
       return [
          model.strip()
          for model in self.supported_models.split(",")

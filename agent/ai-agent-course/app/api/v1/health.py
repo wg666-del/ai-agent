@@ -1,4 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
+
+from app.core.config import settings
 
 router = APIRouter()
 
@@ -7,13 +9,14 @@ router = APIRouter()
 async def health():
     return {
         "status": "ok",
-        "service": "ai-agent-course",
-        "version": "0.1.0"
+        "service": settings.app_name,
+        "env": settings.app_env,
+        "version": settings.app_version,
     }
+
 
 @router.get("/error-demo")
 async def error_demo():
-    raise HTTPException(
-        status_code=400,
-        detail="这是一个错误示例"
-    )
+    return {
+        "message": "error demo will be implemented in exception chapter"
+    }
