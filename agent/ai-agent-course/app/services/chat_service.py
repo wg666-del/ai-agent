@@ -9,13 +9,31 @@ from app.schemas.chat import (
     SourceDocument,
     TokenUsage,
 )
+from app.core.exceptions import AppException, ErrorCode
+from app.core.logging import get_logger
 
+logger = get_logger(__name__)
 
 async def chat_with_ai(request: ChatRequest) -> ChatResponse:
     await asyncio.sleep(0.5)
 
     latest_user_message = get_latest_user_message(request)
     model = request.model or settings.default_model
+
+    logger.info(
+        f"chat_start model={model} message_count={len(request.messages)}"
+    )
+
+    if "触发业务异常" in latest_user_message:
+        raise AppException(
+            message="这是一个模拟业务异常",
+            code=ErrorCode.LLM_CALL_FAILED,
+            status_code=500,
+            data={
+                "reason": "mock llm failed"
+            },
+        )
+
 
     if "AI Agent" in latest_user_message:
         answer = "AI Agent 是能够理解目标、规划步骤、调用工具并根据结果完成任务的智能体。"
@@ -25,6 +43,10 @@ async def chat_with_ai(request: ChatRequest) -> ChatResponse:
         answer = "LangGraph 适合开发有状态、有分支、有流程控制的复杂 Agent。"
     else:
         answer = f"这是一个模拟回答：你刚才问的是「{latest_user_message}」。"
+
+    logger.info(
+        f"chat_success model={model} answer_length={len(answer)}"
+    )
 
     usage = TokenUsage(
         prompt_tokens=count_mock_tokens_from_messages(request),

@@ -1,4 +1,8 @@
-from fastapi import APIRouter, Path
+from fastapi import APIRouter, Path, Depends
+
+from app.dependencies.database import MockBDSession, get_db_session
+
+from app.dependencies.pagination import PaginationParams
 
 from app.schemas.conversation import (
     ConversationCreateRequest,
@@ -17,7 +21,11 @@ router = APIRouter()
 @router.post("/conversations", response_model=ApiResponse[ConversationResponse])
 async def create_new_conversation(
     request: ConversationCreateRequest,
+    db: MockBDSession = Depends(get_db_session)
 ) -> ApiResponse[ConversationResponse]:
+    sql_result = await db.execute("INSERT INTO conversations ...")
+    print(sql_result)
+
     result = await create_conversation(request)
 
     return ApiResponse[ConversationResponse](
@@ -37,3 +45,17 @@ async def get_messages(
     return ApiResponse[ConversationMessagesResponse](
         data=result
     )
+
+
+@router.get("/conversations", response_model=ApiResponse[dict])
+async def list_conversations(
+    pagination: PaginationParams = Depends(PaginationParams),
+) -> ApiResponse[dict]:
+  return ApiResponse[dict](
+     data={
+        "page": pagination.page,
+          "page_size": pagination.page_size,
+          "offset": pagination.offset,
+          "items": [],
+     }
+  )

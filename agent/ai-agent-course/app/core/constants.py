@@ -12,3 +12,4 @@ class ApiTag:
     CONVERSATIONS = "Conversations"
     RAG = "RAG"
     MODELS = "Models"
+    AGENTS = "Agents"

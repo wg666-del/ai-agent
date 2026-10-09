@@ -1,4 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from app.dependencies.auth import require_admin
+from app.schemas.user import CurrentUser
 from pydantic import BaseModel, Field
 
 from app.core.config import settings
@@ -18,7 +20,9 @@ class ModelListResponse(BaseModel):
 
 
 @router.get("/models", response_model=ApiResponse[ModelListResponse])
-async def list_models() -> ApiResponse[ModelListResponse]:
+async def list_models(
+    admin_user: CurrentUser = Depends(require_admin)
+) -> ApiResponse[ModelListResponse]:
     models = [
         ModelInfo(
             name=model,

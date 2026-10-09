@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Path, Query
+from fastapi import APIRouter, Path, Query, Depends
+
+from app.dependencies.auth import get_current_user
+from app.schemas.user import CurrentUser
 
 from app.schemas.chat import (
     ChatRequest,
@@ -9,12 +12,19 @@ from app.schemas.chat import (
 from app.schemas.response import ApiResponse
 from app.services.chat_service import chat_with_ai
 
+from app.dependencies.llm import MockLLMProvider, get_llm_provider
+
 router = APIRouter()
 
 
 @router.post("/chat", response_model=ApiResponse[ChatResponse])
-async def chat(request: ChatRequest) -> ApiResponse[ChatResponse]:
+async def chat(
+    request: ChatRequest,
+    current_user: CurrentUser = Depends(get_current_user)
+) -> ApiResponse[ChatResponse]:
     result = await chat_with_ai(request)
+
+    result.trace_id = f"{result.trace_id}_user_{current_user.user_id}"
 
     return ApiResponse[ChatResponse](
         data=result
@@ -47,4 +57,27 @@ async def generate_chat_title(
 
     return ApiResponse[GenerateTitleResponse](
         data=GenerateTitleResponse(title=title)
+    )
+
+
+@router.post("/chat/di-demo", response_model=ApiResponse[ChatResponse])
+async def chat_di_demo(
+    request: ChatRequest,
+    current_user: CurrentUser = Depends(get_current_user),
+    llm_provider: MockLLMProvider = Depends(get_llm_provider),
+) -> ApiResponse[ChatResponse]:
+    latest_message = request.messages[-1].content
+
+    answer = await llm_provider.chat(
+        message=f"用户 {current_user.username} 问：{latest_message}"
+    )
+
+    result = ChatResponse(
+        answer=answer,
+        model=llm_provider.model,
+        session_id=request.session_id,
+    )
+
+    return ApiResponse[ChatResponse](
+        data=result
     )
