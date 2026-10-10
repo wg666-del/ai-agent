@@ -30,3 +30,16 @@ app/
 ├── repositories/     数据访问层
 ├── models/           数据库 ORM 模型
 └── dependencies/     FastAPI 依赖注入
+
+## 日志与异常处理
+
+本项目统一使用：
+
+```text
+Middleware
++
+Exception Handler
++
+Logger
++
+trace_id
