@@ -68,6 +68,7 @@ async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> 
             role=MessageRole.USER.value,
             content=latest_user_message,
             model=request.model,
+            prompt_tokens=usage.prompt_tokens,
         )
 
         await conversation_repository.add_message(
@@ -76,6 +77,9 @@ async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> 
             role=MessageRole.ASSISTANT.value,
             content=answer,
             model=model,
+            prompt_tokens=usage.prompt_tokens,
+            completion_tokens=usage.completion_tokens,
+            total_tokens=usage.total_tokens,
         )
 
     return ChatResponse(
