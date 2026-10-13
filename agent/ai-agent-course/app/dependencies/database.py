@@ -1,17 +1,13 @@
 from collections.abc import AsyncGenerator
 
-class MockBDSession:
-    async def execute(self, sql: str) -> str:
-        return f"执行 SQL：{sql}"
+from sqlalchemy.ext.asyncio import AsyncSession
 
-    async def close(self):
-        print("关闭 MockDBSession")
+from app.db.session import AsyncSessionLocal
 
 
-async def get_db_session() -> AsyncGenerator[MockBDSession, None]:
-    db = MockBDSession()
-
-    try:
-        yield db
-    finally:
-        await db.close()
+async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.close()
