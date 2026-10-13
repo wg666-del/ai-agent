@@ -1,15 +1,16 @@
-from fastapi import APIRouter, Path, Depends
+from fastapi import APIRouter, Depends, Path
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependencies.database import MockBDSession, get_db_session
-
+from app.dependencies.auth import get_current_user
+from app.dependencies.database import get_db_session
 from app.dependencies.pagination import PaginationParams
-
 from app.schemas.conversation import (
     ConversationCreateRequest,
     ConversationMessagesResponse,
     ConversationResponse,
 )
 from app.schemas.response import ApiResponse
+from app.schemas.user import CurrentUser
 from app.services.conversation_service import (
     create_conversation,
     get_conversation_messages,
@@ -21,12 +22,14 @@ router = APIRouter()
 @router.post("/conversations", response_model=ApiResponse[ConversationResponse])
 async def create_new_conversation(
     request: ConversationCreateRequest,
-    db: MockBDSession = Depends(get_db_session)
+    db: AsyncSession = Depends(get_db_session),
+    current_user: CurrentUser = Depends(get_current_user),
 ) -> ApiResponse[ConversationResponse]:
-    sql_result = await db.execute("INSERT INTO conversations ...")
-    print(sql_result)
-
-    result = await create_conversation(request)
+    result = await create_conversation(
+        db=db,
+        request=request,
+        user_id=current_user.user_id,
+    )
 
     return ApiResponse[ConversationResponse](
         data=result
@@ -39,8 +42,12 @@ async def create_new_conversation(
 )
 async def get_messages(
     conversation_id: str = Path(..., description="会话 ID"),
+    db: AsyncSession = Depends(get_db_session),
 ) -> ApiResponse[ConversationMessagesResponse]:
-    result = await get_conversation_messages(conversation_id)
+    result = await get_conversation_messages(
+        db=db,
+        conversation_id=conversation_id,
+    )
 
     return ApiResponse[ConversationMessagesResponse](
         data=result
@@ -51,11 +58,11 @@ async def get_messages(
 async def list_conversations(
     pagination: PaginationParams = Depends(PaginationParams),
 ) -> ApiResponse[dict]:
-  return ApiResponse[dict](
-     data={
-        "page": pagination.page,
-          "page_size": pagination.page_size,
-          "offset": pagination.offset,
-          "items": [],
-     }
-  )
+    return ApiResponse[dict](
+        data={
+            "page": pagination.page,
+            "page_size": pagination.page_size,
+            "offset": pagination.offset,
+            "items": [],
+        }
+    )

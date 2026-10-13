@@ -1,4 +1,4 @@
-import uuid
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.repositories.conversation_repository import conversation_repository
 from app.schemas.conversation import (
@@ -9,25 +9,33 @@ from app.schemas.conversation import (
 
 
 async def create_conversation(
+    db: AsyncSession,
     request: ConversationCreateRequest,
+    user_id: str | None = None,
 ) -> ConversationResponse:
-    conversation_id = f"c_{uuid.uuid4().hex[:8]}"
-
     conversation = await conversation_repository.create(
-        conversation_id=conversation_id,
+        db=db,
         request=request,
+        user_id=user_id,
     )
 
     return ConversationResponse(
-        conversation_id=conversation["conversation_id"],
-        title=conversation["title"],
+        conversation_id=conversation.id,
+        title=conversation.title,
+        status=conversation.status,
+        created_at=conversation.created_at,
+        updated_at=conversation.updated_at,
     )
 
 
 async def get_conversation_messages(
+    db: AsyncSession,
     conversation_id: str,
 ) -> ConversationMessagesResponse:
-    messages = await conversation_repository.get_messages(conversation_id)
+    messages = await conversation_repository.get_messages(
+        db=db,
+        conversation_id=conversation_id,
+    )
 
     return ConversationMessagesResponse(
         conversation_id=conversation_id,

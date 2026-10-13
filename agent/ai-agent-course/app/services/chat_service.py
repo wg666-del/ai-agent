@@ -12,9 +12,12 @@ from app.schemas.chat import (
 from app.core.exceptions import AppException, ErrorCode
 from app.core.logging import get_logger
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.repositories.conversation_repository import conversation_repository
+
 logger = get_logger(__name__)
 
-async def chat_with_ai(request: ChatRequest) -> ChatResponse:
+async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> ChatResponse:
     await asyncio.sleep(0.5)
 
     latest_user_message = get_latest_user_message(request)
@@ -55,6 +58,25 @@ async def chat_with_ai(request: ChatRequest) -> ChatResponse:
     )
 
     sources = build_mock_sources(latest_user_message)
+
+    if db and request.session_id:
+        latest_user_message = get_latest_user_message(request)
+
+        await conversation_repository.add_message(
+            db=db,
+            conversation_id=request.session_id,
+            role=MessageRole.USER.value,
+            content=latest_user_message,
+            model=request.model,
+        )
+
+        await conversation_repository.add_message(
+            db=db,
+            conversation_id=request.session_id,
+            role=MessageRole.ASSISTANT.value,
+            content=answer,
+            model=model,
+        )
 
     return ChatResponse(
         answer=answer,

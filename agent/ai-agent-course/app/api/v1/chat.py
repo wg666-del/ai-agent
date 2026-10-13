@@ -14,15 +14,19 @@ from app.services.chat_service import chat_with_ai
 
 from app.dependencies.llm import MockLLMProvider, get_llm_provider
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.dependencies.database import get_db_session
+
 router = APIRouter()
 
 
 @router.post("/chat", response_model=ApiResponse[ChatResponse])
 async def chat(
     request: ChatRequest,
-    current_user: CurrentUser = Depends(get_current_user)
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db_session)
 ) -> ApiResponse[ChatResponse]:
-    result = await chat_with_ai(request)
+    result = await chat_with_ai(request, db)
 
     result.trace_id = f"{result.trace_id}_user_{current_user.user_id}"
 
