@@ -20,17 +20,27 @@ from app.dependencies.database import get_db_session
 from redis.asyncio import Redis
 from app.dependencies.redis import get_redis_client
 
+from app.dependencies.rate_limit import chat_rate_limit
+
 router = APIRouter()
 
 
-@router.post("/chat", response_model=ApiResponse[ChatResponse])
+@router.post(
+    "/chat",
+    response_model=ApiResponse[ChatResponse],
+    dependencies=[Depends(chat_rate_limit)]
+)
 async def chat(
     request: ChatRequest,
     current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db_session),
     redis: Redis = Depends(get_redis_client),
 ) -> ApiResponse[ChatResponse]:
-    result = await chat_with_ai(request, db, redis)
+    result = await chat_with_ai(
+        request=request,
+        db=db,
+        redis=redis,
+    )
 
     result.trace_id = f"{result.trace_id}_user_{current_user.user_id}"
 
