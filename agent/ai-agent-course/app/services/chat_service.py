@@ -15,9 +15,20 @@ from app.core.logging import get_logger
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.conversation_repository import conversation_repository
 
+from redis.asyncio import Redis
+
+from app.redis.cache import (
+    cache_chat_response,
+    get_cached_chat_response,
+)
+
 logger = get_logger(__name__)
 
-async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> ChatResponse:
+async def chat_with_ai(
+    request: ChatRequest,
+    db: AsyncSession | None = None,
+    redis: Redis | None = None,
+) -> ChatResponse:
     await asyncio.sleep(0.5)
 
     latest_user_message = get_latest_user_message(request)
@@ -38,6 +49,26 @@ async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> 
         )
 
 
+    if redis:
+        cached_answer = await get_cached_chat_response(
+            redis=redis,
+            question=latest_user_message,
+        )
+
+        if cached_answer:
+            logger.info("chat_response_cache_hit")
+
+            return ChatResponse(
+                answer=cached_answer,
+                model=model,
+                session_id=request.session_id,
+                message_id=f"m_{uuid.uuid4().hex[:8]}",
+                usage=TokenUsage(),
+                sources=[],
+                trace_id=f"trace_{uuid.uuid4().hex[:8]}",
+            )
+
+
     if "AI Agent" in latest_user_message:
         answer = "AI Agent 是能够理解目标、规划步骤、调用工具并根据结果完成任务的智能体。"
     elif "RAG" in latest_user_message:
@@ -46,6 +77,13 @@ async def chat_with_ai(request: ChatRequest, db: AsyncSession | None = None) -> 
         answer = "LangGraph 适合开发有状态、有分支、有流程控制的复杂 Agent。"
     else:
         answer = f"这是一个模拟回答：你刚才问的是「{latest_user_message}」。"
+
+    if redis:
+        await cache_chat_response(
+            redis=redis,
+            question=latest_user_message,
+            answer=answer,
+        )
 
     logger.info(
         f"chat_success model={model} answer_length={len(answer)}"
