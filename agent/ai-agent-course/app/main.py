@@ -6,6 +6,13 @@ from app.core.exception_handlers import register_exception_handlers
 from app.core.logging import setup_logging
 from app.core.middleware import register_middleware
 
+from contextlib import asynccontextmanager
+from app.redis.client import close_redis
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    await close_redis()
 
 def create_app() -> FastAPI:
     setup_logging()
@@ -15,6 +22,7 @@ def create_app() -> FastAPI:
         description="Python + FastAPI + LLM + Agent 开发实战",
         version=settings.app_version,
         debug=settings.debug,
+        lifespan=lifespan,
     )
 
     register_middleware(app)

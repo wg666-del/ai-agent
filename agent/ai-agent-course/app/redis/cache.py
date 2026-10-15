@@ -8,7 +8,7 @@ from app.schemas.chat import ChatMessage, MessageRole
 
 import hashlib
 
-from app.redis.keys import chat_response_cache_key
+from app.redis.keys import chat_response_cache_key, api_key_cache_key
 
 async def cache_recent_messages(
     redis: Redis,
@@ -79,3 +79,27 @@ async def cache_chat_response(
         answer,
         ex=ttl_seconds,
     )
+
+
+async def cache_api_key_user(
+    redis: Redis,
+    api_key_hash: str,
+    user_id: str,
+    ttl_seconds: int = 600,
+):
+    key = api_key_cache_key(api_key_hash)
+
+    await redis.set(
+        key,
+        user_id,
+        ex=ttl_seconds,
+    )
+
+
+async def get_cached_api_key_user(
+    redis: Redis,
+    api_key_hash: str,
+) -> str | None:
+    key = api_key_cache_key(api_key_hash)
+
+    return await redis.get(key)
