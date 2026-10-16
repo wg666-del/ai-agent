@@ -17,7 +17,7 @@ class LLMProviderConfigError(LLMProviderError):
    pass
 
 
-class LLMProvideTimeoutError(LLMProviderError):
+class LLMProviderTimeoutError(LLMProviderError):
    pass
 
 
