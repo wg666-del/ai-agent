@@ -8,11 +8,12 @@ from app.schemas.chat import (
     ChatResponse,
     GenerateTitleRequest,
     GenerateTitleResponse,
+    TokenUsage,
 )
 from app.schemas.response import ApiResponse
 from app.services.chat_service import chat_with_ai
 
-from app.dependencies.llm import MockLLMProvider, get_llm_provider
+from app.dependencies.llm import get_llm_provider
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.dependencies.database import get_db_session
@@ -21,6 +22,9 @@ from redis.asyncio import Redis
 from app.dependencies.redis import get_redis_client
 
 from app.dependencies.rate_limit import chat_rate_limit
+
+from app.llm.base import BaseLLMProvider
+from app.llm.schemas import LLMMessage, LLMRequest, LLMRole
 
 router = APIRouter()
 
@@ -35,11 +39,13 @@ async def chat(
     current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db_session),
     redis: Redis = Depends(get_redis_client),
+    llm_provider: BaseLLMProvider = Depends(get_llm_provider)
 ) -> ApiResponse[ChatResponse]:
     result = await chat_with_ai(
         request=request,
         db=db,
         redis=redis,
+        llm_provider=llm_provider,
     )
 
     result.trace_id = f"{result.trace_id}_user_{current_user.user_id}"
@@ -82,18 +88,32 @@ async def generate_chat_title(
 async def chat_di_demo(
     request: ChatRequest,
     current_user: CurrentUser = Depends(get_current_user),
-    llm_provider: MockLLMProvider = Depends(get_llm_provider),
+    llm_provider: BaseLLMProvider = Depends(get_llm_provider),
 ) -> ApiResponse[ChatResponse]:
     latest_message = request.messages[-1].content
 
-    answer = await llm_provider.chat(
-        message=f"用户 {current_user.username} 问：{latest_message}"
+    llm_response = await llm_provider.chat(
+        LLMRequest(
+            model=request.model,
+            messages=[
+                LLMMessage(
+                    role=LLMRole.USER,
+                    content=f"用户 {current_user.username} 问：{latest_message}",
+                )
+            ],
+            temperature=request.temperature,
+        )
     )
 
     result = ChatResponse(
-        answer=answer,
-        model=llm_provider.model,
+        answer=llm_response.content,
+        model=llm_response.model,
         session_id=request.session_id,
+        usage=TokenUsage(
+            prompt_tokens=llm_response.usage.prompt_tokens,
+            completion_tokens=llm_response.usage.completion_tokens,
+            total_tokens=llm_response.usage.total_tokens,
+        ),
     )
 
     return ApiResponse[ChatResponse](

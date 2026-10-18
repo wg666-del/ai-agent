@@ -41,6 +41,14 @@ class ChatRequest(BaseModel):
     stream: bool = Field(default=False, description="是否流式输出")
     session_id: str | None = Field(default=None, description="会话 ID")
     user_id: str | None = Field(default=None, description="用户 ID")
+    prompt_scenario: str | None = Field(
+        default=None,
+        description="Prompt 场景，如 general_chat / ecommerce_customer_service / rag_qa"
+    )
+    prompt_version: str | None = Field(
+        default="v1",
+        description="Prompt 版本",
+    )
     metadata: dict[str, Any] = Field(default_factory=dict, description="扩展元数据")
 
     @field_validator("model")
