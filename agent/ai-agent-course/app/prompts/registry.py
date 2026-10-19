@@ -7,6 +7,11 @@ from app.prompts.ecommerce import (
 from app.prompts.rag import RAG_QA_PROMPT_V1
 from app.prompts.templates import GENERAL_CHAT_PROMPT_V1
 
+from app.prompts.structured import (
+    AGENT_PLAN_STRUCTURED_PROMPT_V1,
+    INTENT_CLASSIFICATION_STRUCTURED_PROMPT_V1,
+    RAG_STRUCTURED_ANSWER_PROMPT_V1,
+)
 
 class PromptRegistry:
     def __init__(self):
@@ -50,3 +55,6 @@ prompt_register.register(ECOMMERCE_CUSTOMER_SERVICE_PROMPT_V1)
 prompt_register.register(ECOMMERCE_CUSTOMER_SERVICE_PROMPT_V2)
 prompt_register.register(RAG_QA_PROMPT_V1)
 prompt_register.register(AGENT_PLANNER_PROMPT_V1)
+prompt_register.register(INTENT_CLASSIFICATION_STRUCTURED_PROMPT_V1)
+prompt_register.register(RAG_STRUCTURED_ANSWER_PROMPT_V1)
+prompt_register.register(AGENT_PLAN_STRUCTURED_PROMPT_V1)
