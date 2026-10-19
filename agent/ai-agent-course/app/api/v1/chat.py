@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Path, Query, Depends
+from fastapi import APIRouter, Path, Query, Depends, Request
+from fastapi.responses import StreamingResponse
+
+from app.services.chat_stream_service import stream_chat_with_ai
 
 from app.dependencies.auth import get_current_user
 from app.schemas.user import CurrentUser
@@ -53,6 +56,42 @@ async def chat(
     return ApiResponse[ChatResponse](
         data=result
     )
+
+
+@router.post(
+    "/chat/stream",
+    dependencies=[Depends(chat_rate_limit)],
+)
+async def chat_stream(
+    request_body: ChatRequest,
+    request: Request,
+    current_user: CurrentUser = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db_session),
+    redis: Redis = Depends(get_redis_client),
+    llm_provider: BaseLLMProvider = Depends(get_llm_provider),
+):
+    async def event_generator():
+        async for event in stream_chat_with_ai(
+            request=request_body,
+            llm_provider=llm_provider,
+            db=db,
+            redis=redis,
+        ):
+            if await request.is_disconnected():
+                break
+
+            yield event
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        }
+    )
+            
 
 
 @router.post("/conversations/{conversation_id}/chat", response_model=ApiResponse[ChatResponse])

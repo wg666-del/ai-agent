@@ -16,6 +16,7 @@ from app.services.chat_service import (
   get_latest_user_message,
 )
 from app.utils.sse import format_done_event, format_error_event, format_sse
+from app.redis.cache import cache_chat_response, get_cached_chat_response
 
 
 logger = get_logger(__name__)
@@ -40,6 +41,45 @@ async def stream_chat_with_ai(
         f"chat_stream_start model={llm_request.model} "
         f"message_count={len(llm_request.messages)}"
     )
+
+    if redis:
+        cached_answer = await get_cached_chat_response(
+            redis=redis,
+            question=latest_user_message,
+        )
+
+        if cached_answer:
+            logger.info("chat_stream_cache_hit")
+
+            yield format_sse(
+                event="start",
+                data={
+                    "message_id": message_id,
+                    "model": llm_request.model,
+                    "session_id": request.session_id,
+                    "cache_hit": True,
+                }
+            )
+
+            for part in split_text(cached_answer, size=8):
+                yield format_sse(
+                    event="message",
+                    data={
+                        "content": part,
+                        "message_id": message_id,
+                        "cache_hit": True,
+                    }
+                )
+
+            yield format_done_event(
+                {
+                    "message_id": message_id,
+                    "finish_reason": "cache_hit",
+                    "usage": final_usage.model_dump()
+                }
+            )
+
+            return
 
     yield format_sse(
         event="start",
@@ -85,6 +125,13 @@ async def stream_chat_with_ai(
             f"answer_length={len(full_answer)} "
             f"total_tokens={final_usage.total_tokens}"
         )
+
+        if redis and full_answer:
+            await cache_chat_response(
+                redis=redis,
+                question=latest_user_message,
+                answer=full_answer,
+            )
 
         yield format_done_event(
             {
@@ -147,3 +194,9 @@ async def save_stream_messages(
         completion_tokens=usage.completion_tokens,
         total_tokens=usage.total_tokens,
     )
+
+def split_text(text: str, size: int = 8) -> list[str]:
+    return [
+        text[index:index + size]
+        for index in range(0, len(text), size)
+    ]
