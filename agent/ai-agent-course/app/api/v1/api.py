@@ -9,6 +9,7 @@ from app.api.v1.rag import router as rag_router
 from app.api.v1.models import router as models_router
 from app.api.v1.agents import router as agents_router
 from app.api.v1.prompts import router as prompts_router
+from app.api.v1.structured_outputs import router as structured_outputs_router
 from app.core.constants import ApiTag
 
 
@@ -21,3 +22,4 @@ api_router.include_router(rag_router, tags=[ApiTag.RAG], dependencies=[Depends(v
 api_router.include_router(models_router, tags=[ApiTag.MODELS])
 api_router.include_router(agents_router, tags=[ApiTag.AGENTS], dependencies=[Depends(verify_api_key)])
 api_router.include_router(prompts_router, tags=["Prompts"])
+api_router.include_router(structured_outputs_router, tags=["Structured Outputs"])

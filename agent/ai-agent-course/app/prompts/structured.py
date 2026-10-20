@@ -15,7 +15,7 @@ INTENT_CLASSIFICATION_STRUCTURED_PROMPT_V1 = PromptTemplate(
   required_variables=[
     "user_question",
   ],
-  message=[
+  messages=[
     PromptMessageTemplate(
       role=PromptRole.SYSTEM,
       template=(
