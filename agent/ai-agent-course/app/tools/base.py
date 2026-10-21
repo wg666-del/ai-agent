@@ -43,6 +43,6 @@ class ToolDefinition(BaseModel):
     result = self.func(**validated_args.model_dump())
 
     if inspect.isawaitable(result):
-      return await self.result
+      return await result
 
-    return self.result
+    return result

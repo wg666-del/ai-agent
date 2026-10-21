@@ -22,6 +22,7 @@ from app.schemas.chat import (
 
 from app.prompts.base import PromptScenario
 from app.services.prompt_service import prompt_service
+from app.services.tool_calling_service import tool_calling_service
 
 
 logger = get_logger(__name__)
@@ -58,6 +59,25 @@ async def chat_with_ai(
                 sources=[],
                 trace_id=f"trace_{uuid.uuid4().hex[:8]}",
             )
+
+    if request.prompt_scenario == "ecommerce_customer_service":
+        tool_result = await tool_calling_service.run_with_tools(
+            user_question=latest_user_message,
+            model=model,
+            llm_provider=llm_provider
+        )
+
+        answer = tool_result["answer"]
+
+        return ChatResponse(
+            answer=answer,
+            model=model,
+            session_id=request.session_id or f"s_{uuid.uuid4().hex[:8]}",
+            message_id=f"m_{uuid.uuid4().hex[:8]}",
+            usage=TokenUsage(),
+            sources=[],
+            trace_id=f"trace_{uuid.uuid4().hex[:8]}",
+        )
 
     llm_provider = llm_provider or LLMProviderFactory.create()
 
