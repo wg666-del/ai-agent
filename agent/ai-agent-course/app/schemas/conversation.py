@@ -23,6 +23,11 @@ class ConversationResponse(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now, description="创建时间")
     updated_at: datetime = Field(default_factory=datetime.now, description="更新时间")
 
+class ConversationListResponse(BaseModel):
+    conversations: list[ConversationResponse] = Field(
+        default_factory=list,
+        description="会话列表",
+    )
 
 class ConversationMessagesResponse(BaseModel):
     conversation_id: str = Field(..., description="会话 ID")

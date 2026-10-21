@@ -20,6 +20,7 @@ class ConversationRepository:
             id=f"c_{uuid.uuid4().hex[:8]}",
             title=request.title,
             user_id=user_id,
+            status="active",
         )
 
         db.add(conversation)
@@ -28,15 +29,51 @@ class ConversationRepository:
 
         return conversation
 
+    async def list_conversations(
+        self,
+        db: AsyncSession,
+        user_id: str | None = None,
+        limit: int = 20,
+    ) -> list[Conversation]:
+        stmt = (
+            select(Conversation)
+            .where(Conversation.status == "active")
+            .order_by(Conversation.updated_at.desc())
+            .limit(limit)
+        )
+
+        if user_id:
+            stmt = stmt.where(Conversation.user_id == user_id)
+
+        result = await db.execute(stmt)
+
+        return list(result.scalars().all())
+
+    async def get_conversation(
+        self,
+        db: AsyncSession,
+        conversation_id: str,
+    ) -> Conversation | None:
+        stmt = select(Conversation).where(
+            Conversation.id == conversation_id,
+            Conversation.status == "active",
+        )
+
+        result = await db.execute(stmt)
+
+        return result.scalar_one_or_none()
+
     async def get_messages(
         self,
         db: AsyncSession,
         conversation_id: str,
+        limit: int = 50,
     ) -> list[ChatMessage]:
         stmt = (
             select(Message)
             .where(Message.conversation_id == conversation_id)
             .order_by(Message.created_at.asc())
+            .limit(limit)
         )
 
         result = await db.execute(stmt)
@@ -78,5 +115,23 @@ class ConversationRepository:
 
         return message
 
+    async def archive_conversation(
+        self,
+        db: AsyncSession,
+        conversation_id: str,
+    ) -> bool:
+        conversation = await self.get_conversation(
+            db=db,
+            conversation_id=conversation_id
+        )
+
+        if not conversation:
+            return False
+
+        conversation.status = "archived"
+
+        await db.commit()
+
+        return True
 
 conversation_repository = ConversationRepository()
