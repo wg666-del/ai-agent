@@ -10,7 +10,7 @@ from app.schemas.conversation import ConversationCreateRequest
 
 
 class ConversationRepository:
-    async def create(
+    async def create_conversation(
         self,
         db: AsyncSession,
         request: ConversationCreateRequest,
