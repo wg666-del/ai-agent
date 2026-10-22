@@ -41,3 +41,6 @@ yarn-error.log*
 .venv/
 __pycache__/
 *.py[cod]
+
+# VS Code local settings
+.vscode/settings.json
