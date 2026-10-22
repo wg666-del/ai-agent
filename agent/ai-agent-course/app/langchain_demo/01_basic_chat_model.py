@@ -36,8 +36,13 @@ def run_chat_with_messages():
 
     messages = [
         SystemMessage(content="你是一个专业 AI Agent 课程助教。"),
+        HumanMessage(content="LangChain 和直接调用大模型 API 有什么区别？")
     ]
+
+    response = model.invoke(messages)
+
+    print(response.content)
 
 
 if __name__ == "__main__":
-    run_basic_chat()
+    run_chat_with_messages()
