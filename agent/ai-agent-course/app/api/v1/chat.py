@@ -44,6 +44,8 @@ async def chat(
     redis: Redis = Depends(get_redis_client),
     llm_provider: BaseLLMProvider = Depends(get_llm_provider)
 ) -> ApiResponse[ChatResponse]:
+    request.user_id = current_user.user_id
+
     result = await chat_with_ai(
         request=request,
         db=db,
@@ -70,6 +72,9 @@ async def chat_stream(
     redis: Redis = Depends(get_redis_client),
     llm_provider: BaseLLMProvider = Depends(get_llm_provider),
 ):
+    request_body.user_id = current_user.user_id
+    request_body.stream = True
+
     async def event_generator():
         async for event in stream_chat_with_ai(
             request=request_body,

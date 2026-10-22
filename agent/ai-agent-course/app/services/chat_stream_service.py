@@ -14,6 +14,7 @@ from app.schemas.chat import ChatRequest, MessageRole, TokenUsage
 from app.services.chat_service import (
   build_llm_request_from_chat_request,
   get_latest_user_message,
+  save_chat_messages,
 )
 from app.utils.sse import format_done_event, format_error_event, format_sse
 from app.redis.cache import cache_chat_response, get_cached_chat_response
@@ -87,6 +88,7 @@ async def stream_chat_with_ai(
             "message_id": message_id,
             "model": llm_request.model,
             "session_id": request.session_id,
+            "cache_hit": True,
         },
     )
 
@@ -110,10 +112,17 @@ async def stream_chat_with_ai(
                     total_tokens=chunk.usage.total_tokens,
                 )
 
+        if redis and full_answer:
+            await cache_chat_response(
+                redis=redis,
+                question=latest_user_message,
+                answer=full_answer,
+            )
+
         if db and request.session_id:
-          await save_stream_messages(
+          await save_chat_messages(
               db=db,
-              session_id=request.session_id,
+              conversation_id=request.session_id,
               user_message=latest_user_message,
               assistant_message=full_answer,
               model=llm_request.model,
@@ -125,13 +134,6 @@ async def stream_chat_with_ai(
             f"answer_length={len(full_answer)} "
             f"total_tokens={final_usage.total_tokens}"
         )
-
-        if redis and full_answer:
-            await cache_chat_response(
-                redis=redis,
-                question=latest_user_message,
-                answer=full_answer,
-            )
 
         yield format_done_event(
             {
