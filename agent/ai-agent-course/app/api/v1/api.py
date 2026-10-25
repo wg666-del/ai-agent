@@ -11,6 +11,9 @@ from app.api.v1.agents import router as agents_router
 from app.api.v1.prompts import router as prompts_router
 from app.api.v1.structured_outputs import router as structured_outputs_router
 from app.api.v1.tool_calling import router as tool_calling_router
+from app.api.v1.langchain_structured_outputs import (
+  router as langchain_structured_outputs_router,
+)
 from app.core.constants import ApiTag
 
 
@@ -25,3 +28,4 @@ api_router.include_router(agents_router, tags=[ApiTag.AGENTS], dependencies=[Dep
 api_router.include_router(prompts_router, tags=["Prompts"])
 api_router.include_router(structured_outputs_router, tags=["Structured Outputs"])
 api_router.include_router(tool_calling_router, tags=["Tool Calling"])
+api_router.include_router(langchain_structured_outputs_router, tags=["LangChain Structured Outputs"])

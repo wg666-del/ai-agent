@@ -150,7 +150,7 @@ class StructuredOutputService:
             ) from exc
 
         try:
-            result = parse_or_repair_structed_output(
+            result = await parse_or_repair_structed_output(
                 raw_text=response.content,
                 schema=schema,
                 model=request.model,

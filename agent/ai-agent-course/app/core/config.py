@@ -11,6 +11,7 @@ class Settings(BaseSettings):
 
   app_api_key: str = Field(default="dev-api-key-123")
 
+  default_llm_provider: str = Field(default="deepseek")
   default_model: str = Field(default="deepseek-chat")
   supported_models: str = Field(default="deepseek-chat,qwen-plus,gpt-4o-mini")
 
@@ -36,6 +37,7 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",
   )
 
   @property

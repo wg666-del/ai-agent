@@ -84,7 +84,7 @@ async def plan_agent(
     request: AgentPlanRequest,
     current_user: CurrentUser = Depends(get_current_user),
     llm_provider: BaseLLMProvider = Depends(get_llm_provider),
-) -> ApiResponse[AgentPlanRequest]:
+) -> ApiResponse[AgentPlanOutput]:
     result = await structured_output_service.plan_agent_task(
         user_goal=request.goal,
         available_tools=request.available_tools,
