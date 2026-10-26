@@ -14,6 +14,7 @@ from app.api.v1.tool_calling import router as tool_calling_router
 from app.api.v1.langchain_structured_outputs import (
   router as langchain_structured_outputs_router,
 )
+from app.api.v1.langchain_tools import router as langchain_tools_router
 from app.core.constants import ApiTag
 
 
@@ -29,3 +30,4 @@ api_router.include_router(prompts_router, tags=["Prompts"])
 api_router.include_router(structured_outputs_router, tags=["Structured Outputs"])
 api_router.include_router(tool_calling_router, tags=["Tool Calling"])
 api_router.include_router(langchain_structured_outputs_router, tags=["LangChain Structured Outputs"])
+api_router.include_router(langchain_tools_router, tags=["LangChain Tools"])
