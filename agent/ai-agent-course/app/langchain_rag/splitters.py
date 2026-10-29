@@ -39,14 +39,14 @@ def split_documents(
 def format_docs(docs: list[Document]) -> str:
     lines = []
 
-    for index, doc in enumerate(doc, start=1):
+    for index, doc in enumerate(docs, start=1):
         document_id = doc.metadata.get("document_id", "unknow")
         chunk_id = doc.metadata.get("chunk_id", "unknow")
         source = doc.metadata.get("source", "unknow")
 
-    lines.append(
-        f"[{index}] document_id={document_id}, chunk_id={chunk_id}, source={source}\n"
-        f"{doc.page_content}"
-    )
+        lines.append(
+            f"[{index}] document_id={document_id}, chunk_id={chunk_id}, source={source}\n"
+            f"{doc.page_content}"
+        )
 
     return "\n\n".join(lines)
