@@ -81,21 +81,22 @@ def build_graph():
     store = InMemoryStore()
     checkpointer = InMemorySaver()
 
-    return graph.compile(
+    app = graph.compile(
         store=store,
         checkpointer=checkpointer,
     )
 
+    return app, store
 
 def main():
-    app = build_graph()
+    app, store = build_graph()
 
     tenant_id = "tenant_001"
     user_id = "u_10001"
 
     namespace = (tenant_id, user_id, "preferences")
 
-    app.store.put(
+    store.put(
         namespace,
         "answer_style",
         {
