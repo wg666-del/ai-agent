@@ -22,6 +22,7 @@ from app.api.v1.langgraph_persistence import router as langgraph_persistence_rou
 from app.api.v1.langgraph_hitl import router as langgraph_hitl_router
 from app.api.v1.langgraph_memory import router as langgraph_memory_router
 from app.api.v1.langgraph_multi_agent import router as langgraph_multi_agent_router
+from app.api.v1.langgraph_ecommerce_agent import router as ecommerce_agent_router
 from app.core.constants import ApiTag
 
 
@@ -45,3 +46,4 @@ api_router.include_router(langgraph_persistence_router, tags=["LangGraph Persist
 api_router.include_router(langgraph_hitl_router, tags=["LangGraph HITL"])
 api_router.include_router(langgraph_memory_router, tags=["LangGraph Memory"])
 api_router.include_router(langgraph_multi_agent_router, tags=["LangGraph Multi-Agent"])
+api_router.include_router(ecommerce_agent_router,tags=["Project 2 - LangGraph Ecommerce Agent"])

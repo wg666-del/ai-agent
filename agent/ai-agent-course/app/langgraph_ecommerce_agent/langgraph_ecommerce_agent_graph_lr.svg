@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1820" viewBox="0 0 2400 1820">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker>
+  </defs>
+  <rect x="0" y="0" width="2400" height="1820" fill="#ffffff"/>
+  <text x="40" y="44" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#111827">LangGraph 电商客服流程图（整体从左到右）</text>
+  <text x="40" y="70" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#6b7280">来源：app/langgraph_ecommerce_agent/graph_factory.py   ·   26 节点 / 39 边   ·   箭头旁文字 = 条件路由结果</text>
+  <line x1="1800" y1="230" x2="1800" y2="1310" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 1800,830 L 1870,830" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 150.0,590.0 C 204.0,590.0 216.0,590.0 270.0,590.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 350.0,590.0 C 404.0,590.0 416.0,590.0 470.0,590.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 525.4,553.1 C 601.5,553.1 618.5,146.9 694.6,146.9" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 529.4,555.0 C 601.9,555.0 618.1,265.0 690.6,265.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 535.6,559.3 C 602.6,559.3 617.4,380.7 684.4,380.7" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 535.6,620.7 C 602.6,620.7 617.4,799.3 684.4,799.3" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 544.3,610.6 C 603.4,610.6 616.6,689.4 675.7,689.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 744.3,850.6 C 803.4,850.6 816.6,929.4 875.7,929.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 944.3,970.6 C 1003.4,970.6 1016.6,1049.4 1075.7,1049.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 935.6,980.7 C 1002.6,980.7 1017.4,1159.3 1084.4,1159.3" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 929.4,985.0 C 1001.9,985.0 1018.1,1275.0 1090.6,1275.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 744.3,689.4 C 803.4,689.4 816.6,610.6 875.7,610.6" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 744.3,730.6 C 818.9,730.6 835.4,790.0 910.0,790.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 944.3,809.4 C 1003.4,809.4 1016.6,730.6 1075.7,730.6" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 950.0,830.0 C 1004.0,830.0 1016.0,830.0 1070.0,830.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 944.3,850.6 C 1003.4,850.6 1016.6,929.4 1075.7,929.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 870.0,830.0 C 816.0,830.0 804.0,830.0 750.0,830.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1144.3,1330.6 C 1203.4,1330.6 1216.6,1409.4 1275.7,1409.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150.0,1310.0 C 1384.0,1310.0 1436.0,1310.0 1670.0,1310.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1350.0,1430.0 C 1404.0,1430.0 1416.0,1430.0 1470.0,1430.0" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1344.3,1450.6 C 1403.4,1450.6 1416.6,1529.4 1475.7,1529.4" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1675.7,1529.4 C 1616.6,1529.4 1603.4,1450.6 1544.3,1450.6" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1544.3,1409.4 C 1603.4,1409.4 1616.6,1330.6 1675.7,1330.6" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1535.6,1519.3 C 1602.6,1519.3 1617.4,1340.7 1684.4,1340.7" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1935.6,799.3 C 2002.6,799.3 2017.4,620.7 2084.4,620.7" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1935.6,860.7 C 2002.6,860.7 2017.4,1039.3 2084.4,1039.3" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 2144.3,569.4 C 2203.4,569.4 2216.6,490.6 2275.7,490.6" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 750,230 L 1800,230" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 750,350 L 1800,350" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 950,590 L 1800,590" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150,710 L 1800,710" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150,830 L 1800,830" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150,950 L 1800,950" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150,1070 L 1800,1070" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1150,1190 L 1800,1190" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 1750,1310 L 1800,1310" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 750,110 L 2184.0,110.0 Q 2200,110 2200.0,126.0 L 2200.0,454.0 Q 2200,470 2216.0,470.0 L 2270,470" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <path d="M 2150,1070 L 2209.0,1070.0 Q 2225,1070 2225.0,1054.0 L 2225.0,846.0 Q 2225,830 2209.0,830.0 L 1950,830" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#a)"/>
+  <text x="585" y="344" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">记住偏好</text>
+  <text x="605" y="404" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">通用问答</text>
+  <text x="625" y="464" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">转人工</text>
+  <text x="605" y="644" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">订单/退款</text>
+  <text x="585" y="704" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">售后规则</text>
+  <text x="1006" y="1002" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">命中·规则</text>
+  <text x="1014" y="1062" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">未命中</text>
+  <text x="1006" y="1122" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">退款·评估</text>
+  <text x="810" y="638" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">无订单号</text>
+  <text x="818" y="762" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">有订单号</text>
+  <text x="1010" y="758" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">未找到</text>
+  <text x="1018" y="820" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">物流</text>
+  <text x="1010" y="880" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">查订单</text>
+  <text x="812" y="852" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">退款需先查规则</text>
+  <text x="1220" y="1378" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">高风险</text>
+  <text x="1400" y="1300" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">低风险</text>
+  <text x="1408" y="1420" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">approve</text>
+  <text x="1348" y="1490" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">reject</text>
+  <text x="1532" y="1508" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">edit</text>
+  <text x="2010" y="700" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">通过</text>
+  <text x="2018" y="962" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">需改写</text>
+  <text x="2242" y="952" text-anchor="start" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">重试</text>
+  <text x="1100" y="100" text-anchor="middle" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">直接结束</text>
+  <text x="1792" y="208" text-anchor="end" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11" fill="#475569" stroke="#ffffff" stroke-width="3" paint-order="stroke">9 条回答分支汇合</text>
+  <circle cx="110" cy="590" r="40" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.8"/>
+  <text x="110" y="593.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="9.8" font-weight="600" fill="#374151">__start__</text>
+  <circle cx="310" cy="590" r="40" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.8"/>
+  <text x="310" y="587.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">recall</text>
+  <text x="310" y="599.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">memory</text>
+  <circle cx="510" cy="590" r="40" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.8"/>
+  <text x="510" y="587.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">classify</text>
+  <text x="510" y="599.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">intent</text>
+  <circle cx="710" cy="110" r="40" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.8"/>
+  <text x="710" y="107.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">write</text>
+  <text x="710" y="119.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#5b21b6">memory</text>
+  <circle cx="710" cy="230" r="40" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.8"/>
+  <text x="710" y="227.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#0369a1">general</text>
+  <text x="710" y="239.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#0369a1">answer</text>
+  <circle cx="710" cy="350" r="40" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.8"/>
+  <text x="710" y="347.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#0369a1">transfer</text>
+  <text x="710" y="359.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#0369a1">human</text>
+  <circle cx="710" cy="710" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="710" y="701.8" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">extract</text>
+  <text x="710" y="713.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">order</text>
+  <text x="710" y="725.4" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">id</text>
+  <circle cx="710" cy="830" r="40" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <text x="710" y="821.8" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">build</text>
+  <text x="710" y="833.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">policy</text>
+  <text x="710" y="845.4" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">query</text>
+  <circle cx="910" cy="590" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="910" y="581.8" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">ask</text>
+  <text x="910" y="593.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">order</text>
+  <text x="910" y="605.4" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">id</text>
+  <circle cx="910" cy="830" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="910" y="827.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">query</text>
+  <text x="910" y="839.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">order</text>
+  <circle cx="910" cy="950" r="40" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <text x="910" y="947.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">retrieve</text>
+  <text x="910" y="959.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">policy</text>
+  <circle cx="1110" cy="710" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="1110" y="701.8" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">order</text>
+  <text x="1110" y="713.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">not</text>
+  <text x="1110" y="725.4" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">found</text>
+  <circle cx="1110" cy="830" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="1110" y="827.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">query</text>
+  <text x="1110" y="839.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">logistics</text>
+  <circle cx="1110" cy="950" r="40" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.8"/>
+  <text x="1110" y="947.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">answer</text>
+  <text x="1110" y="959.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b45309">order</text>
+  <circle cx="1110" cy="1070" r="40" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <text x="1110" y="1067.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">answer</text>
+  <text x="1110" y="1079.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">policy</text>
+  <circle cx="1110" cy="1190" r="40" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.8"/>
+  <text x="1110" y="1187.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">policy</text>
+  <text x="1110" y="1199.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#047857">fallback</text>
+  <circle cx="1110" cy="1310" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="1110" y="1307.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">assess</text>
+  <text x="1110" y="1319.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">risk</text>
+  <circle cx="1310" cy="1430" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8" stroke-dasharray="6,4"/>
+  <text x="1310" y="1427.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">human</text>
+  <text x="1310" y="1439.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">review</text>
+  <circle cx="1510" cy="1430" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="1510" y="1427.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">execute</text>
+  <text x="1510" y="1439.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">refund</text>
+  <circle cx="1510" cy="1550" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="1510" y="1547.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">reject</text>
+  <text x="1510" y="1559.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">refund</text>
+  <circle cx="1710" cy="1310" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="1710" y="1301.8" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">generate</text>
+  <text x="1710" y="1313.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">refund</text>
+  <text x="1710" y="1325.4" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">answer</text>
+  <circle cx="1710" cy="1550" r="40" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="1710" y="1547.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">apply</text>
+  <text x="1710" y="1559.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#b91c1c">edit</text>
+  <circle cx="1910" cy="830" r="40" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.8"/>
+  <text x="1910" y="827.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#4338ca">review</text>
+  <text x="1910" y="839.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#4338ca">answer</text>
+  <circle cx="2110" cy="1070" r="40" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.8"/>
+  <text x="2110" y="1067.7" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#4338ca">rewrite</text>
+  <text x="2110" y="1079.5" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#4338ca">answer</text>
+  <circle cx="2110" cy="590" r="40" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.8"/>
+  <text x="2110" y="593.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="11.5" font-weight="600" fill="#4338ca">finish</text>
+  <circle cx="2310" cy="470" r="40" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.8"/>
+  <text x="2310" y="473.6" text-anchor="middle" font-family="Consolas, Cascadia Mono, Courier New, monospace" font-size="9.8" font-weight="600" fill="#374151">__end__</text>
+  <rect x="40" y="1630" width="1180" height="150" rx="12" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="62" y="1656" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#374151">图例</text>
+  <circle cx="73" cy="1678" r="11" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.6"/>
+  <text x="92" y="1682" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">入口 / 结束</text>
+  <circle cx="363" cy="1678" r="11" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.6"/>
+  <text x="382" y="1682" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">记忆 · 意图</text>
+  <circle cx="653" cy="1678" r="11" fill="#f0f9ff" stroke="#7dd3fc" stroke-width="1.6"/>
+  <text x="672" y="1682" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">通用问答 · 转人工</text>
+  <circle cx="943" cy="1678" r="11" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.6"/>
+  <text x="962" y="1682" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">售后规则</text>
+  <circle cx="73" cy="1720" r="11" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.6"/>
+  <text x="92" y="1724" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">订单 · 物流</text>
+  <circle cx="363" cy="1720" r="11" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.6"/>
+  <text x="382" y="1724" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">退款风控 · HITL</text>
+  <circle cx="653" cy="1720" r="11" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.6"/>
+  <text x="672" y="1724" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">审核 · 输出</text>
+  <circle cx="947" cy="1720" r="11" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.6" stroke-dasharray="5,3"/>
+  <text x="966" y="1724" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" fill="#374151">人工介入（interrupt）</text>
+  <rect x="1240" y="1630" width="1120" height="150" rx="12" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="1262" y="1656" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="12" font-weight="700" fill="#374151">说明</text>
+  <text x="1262" y="1682" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11.5" fill="#4b5563">① 圆形 = 节点（add_node 注册的函数名），颜色 = 业务域。</text>
+  <text x="1262" y="1705" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11.5" fill="#4b5563">② 右侧竖线为汇合线：9 个回答节点统一汇入 review_answer。</text>
+  <text x="1262" y="1728" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11.5" fill="#4b5563">③ 虚线圆 human_review：interrupt() 暂停，等待人工 approve / edit / reject 后恢复。</text>
+  <text x="1262" y="1751" font-family="Microsoft YaHei, Segoe UI, sans-serif" font-size="11.5" fill="#4b5563">④ rewrite_answer → review_answer 为重试回环（retry_count &lt; max_retry）。</text>
+</svg>
