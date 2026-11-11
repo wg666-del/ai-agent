@@ -1,5 +1,6 @@
 from langgraph.types import Command
 
+from app.core.exceptions import AppException, ErrorCode
 from app.langgraph_ecommerce_agent.graph_factory import build_ecommerce_agent_graph
 from app.langgraph_ecommerce_agent.schemas import (
     EcommerceAgentContext,
@@ -111,6 +112,24 @@ class LangGraphEcommerceAgentService:
             user_id=user_id,
             conversation_id=conversation_id,
         )
+
+        snapshot = await self.graph.aget_state(config)
+
+        # 没有待处理的中断时（会话不存在、已结束、或服务重启导致内存 checkpoint 丢失），
+        # 直接 Command(resume=...) 会从 START 用空状态重跑图，导致 KeyError 等 500 错误。
+        if not snapshot.interrupts:
+            raise AppException(
+                message=(
+                    "当前会话没有待人工确认的操作，"
+                    "请先通过 /langgraph/ecommerce-agent/chat 发起需要人工审核的对话"
+                ),
+                code=ErrorCode.BAD_REQUEST,
+                status_code=409,
+                data={
+                    "thread_id": thread_id,
+                    "next": list(snapshot.next),
+                },
+            )
 
         result = await self.graph.ainvoke(
             Command(resume=decision),
