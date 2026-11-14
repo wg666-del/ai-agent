@@ -19,6 +19,9 @@ Python + FastAPI + LLM + LangChain + LangGraph + DeepAgents
 uv sync
 uv run uvicorn app.main:app --reload
 
+# 运行教学脚本同样要在项目虚拟环境中执行
+uv run python scripts/test_doc40_02_parse_markdown.py
+
 ## 项目结构
 
 ```text
