@@ -1,0 +1,33 @@
+[project]
+name = "document-loader-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "wanggang2", email = "wanggang2@yxt.wecom.work" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "docx2txt>=0.9",
+    "jq>=1.13.0",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.8.4",
+    "langchain-text-splitters>=1.1.3",
+    "lxml>=6.1.3",
+    "openpyxl>=3.1.5",
+    "pandas>=3.1.1",
+    "pillow>=13.0.0",
+    "pymupdf>=2.1",
+    "pypdf>=7.1.1",
+    "pytesseract>=0.3.13",
+    "python-dotenv>=1.2.4",
+    "unstructured>=0.27.37",
+]
+
+[project.scripts]
+document-loader-demo = "document_loader_demo:main"
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
