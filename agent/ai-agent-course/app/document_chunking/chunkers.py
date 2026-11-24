@@ -309,3 +309,231 @@ class ElementChunker(BaseChunker):
             strategy=ChunkStrategy.ELEMENT,
             chunks=chunks,
         )
+
+
+class HeadingChunker(BaseChunker):
+    def split(
+        self,
+        document: ParsedDocument,
+    ) -> ChunkResult:
+        chunks: list[ChunkDocument] = []
+        current_heading = document.title
+        current_parts: list[str] = []
+        current_element_ids: list[str] = []
+        current_page_numbers: set[int] = set()
+        chunk_index = 0
+
+        def flush_current():
+            nonlocal chunk_index, current_parts, current_element_ids, current_page_numbers
+
+            if not current_parts:
+                return
+
+            content = "\n\n".join(current_parts)
+
+            if not self.should_keep_chunk(content):
+                current_parts = []
+                current_element_ids = []
+                current_page_numbers = set()
+                return
+
+            chunks.append(
+                self.create_chunk(
+                    document=document,
+                    content=content,
+                    chunk_index=chunk_index,
+                    strategy=ChunkStrategy.HEADING,
+                    extra_metadata={
+                        "heading": current_heading,
+                        "element_ids": current_element_ids,
+                        "page_numbers": sorted(current_page_numbers),
+                    },
+                )
+            )
+
+            chunk_index += 1
+            current_parts = []
+            current_element_ids = []
+            current_page_numbers = set()
+
+        for element in document.elements:
+            if element.type == ParsedElementType.TITLE:
+                flush_current()
+                current_heading = element.content
+                current_parts = [element.content]
+                current_element_ids = [element.element_id]
+
+                if element.page_number:
+                    current_page_numbers.add(element.page_number)
+
+                continue
+
+            current_parts.append(element.content)
+            current_element_ids.append(element.element_id)
+
+            if element.page_number:
+                current_page_numbers.add(element.page_number)
+
+            current_content_size = len("\n\n".join(current_parts))
+
+            if current_content_size >= self.config.chunk_size:
+                flush_current()
+
+                if self.config.chunk_overlap > 0:
+                    current_parts = [f"上级标题：{current_heading}"]
+                    current_element_ids = []
+                    current_page_numbers = set()
+
+        flush_current()
+
+        return ChunkResult(
+            document_id=document.document_id,
+            title=document.title,
+            total_chunks=len(chunks),
+            strategy=ChunkStrategy.HEADING,
+            chunks=chunks,
+        )
+
+
+
+class TableAwareChunker(BaseChunker):
+    def split(
+        self,
+        document: ParsedDocument,
+    ) -> ChunkResult:
+        chunks = list[ChunkDocument] = []
+        chunk_index = 0
+        text_buffer: list[str] = []
+
+        def flush_text_buffer():
+            nonlocal chunk_index, text_buffer
+
+            if not text_buffer:
+                return
+
+            content = "\n\n".join(text_buffer)
+
+            if self.should_keep_chunk(content):
+                chunks.append(
+                    self.create_chunk(
+                        document=document,
+                        content=content,
+                        chunk_index=chunk_index,
+                        strategy=ChunkStrategy.TABLE_AWARE,
+                        extra_metadata={
+                            "chunk_content_type": "text",
+                        },
+                    )
+                )
+                chunk_index += 1
+
+            text_buffer = []
+
+        for element in document.elements:
+            if element.type == ParsedElementType.TABLE:
+                flush_text_buffer()
+
+                if self.should_keep_chunk(element.content):
+                    chunks.append(
+                        self.create_chunk(
+                            document=document,
+                            content=element.content,
+                            chunk_index=chunk_index,
+                            strategy=ChunkStrategy.TABLE_AWARE,
+                            extra_metadata={
+                                "chunk_content_type": "table",
+                                "element_id": element.element_id,
+                                "page_number": element.page_number,
+                                "order_index": element.order_index,
+                            }
+                        )
+                    )
+                    chunk_index += 1
+
+                continue
+
+            text_buffer.append(element.content)
+
+            if len("\n\n".join(text_buffer)) >= self.config.chunk_size:
+                flush_text_buffer()
+
+        flush_text_buffer()
+
+        return ChunkResult(
+            document_id=document.document_id,
+            title=document.title,
+            total_chunks=len(chunks),
+            strategy=ChunkStrategy.TABLE_AWARE,
+            chunks=chunks,
+        )
+
+
+class CodeAwareChunker(BaseChunker):
+    def split(
+        self,
+        document: ParsedDocument,
+    ) -> ChunkResult:
+        chunks: list[ChunkDocument] = []
+        chunk_index = 0
+        text_buffer: list[str] = []
+
+        def flush_text_buffer():
+            nonlocal chunk_index, text_buffer
+
+            if not text_buffer:
+                return
+
+            content = "\n\n".join(text_buffer)
+
+            if self.should_keep_chunk(content):
+                chunks.append(
+                    self.create_chunk(
+                        document=document,
+                        content=content,
+                        chunk_index=chunk_index,
+                        strategy=ChunkStrategy.CODE_AWARE,
+                        extra_metadata={
+                            "chunk_content_type": "text",
+                        },
+                    )
+                )
+                chunk_index += 1
+
+            text_buffer = []
+
+        for element in document.elements:
+            if element.type == ParsedElementType.CODE:
+                flush_text_buffer()
+
+                if self.should_keep_chunk(element.content):
+                    chunks.append(
+                        self.create_chunk(
+                            document=document,
+                            content=element.content,
+                            chunk_index=chunk_index,
+                            strategy=ChunkStrategy.CODE_AWARE,
+                            extra_metadata={
+                                "chunk_content_type": "code",
+                                "element_id": element.element_id,
+                                "language": element.metadata.get("language"),
+                            },
+                        )
+                    )
+                    chunk_index += 1
+
+                continue
+
+            text_buffer.append(element.content)
+
+            if len("\n\n".join(text_buffer)) >= self.config.chunk_size:
+                flush_text_buffer()
+
+        flush_text_buffer()
+
+        return ChunkResult(
+            document_id=document.document_id,
+            title=document.title,
+            total_chunks=len(chunks),
+            strategy=ChunkStrategy.CODE_AWARE,
+            chunks=chunks,
+        )
