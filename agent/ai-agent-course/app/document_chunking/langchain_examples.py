@@ -67,4 +67,43 @@ def demo_markdown_header_splitter():
 
 
 def demo_python_code_splitter():
-    # from langchain_text_splitters import Language
+    from langchain_text_splitters import Language, RecursiveCharacterTextSplitter
+
+    code = '''
+class OrderService:
+    def query_order(self, order_id: str):
+        return {"order_id": order_id}
+
+    def refund_order(self, order_id: str):
+        return {"success": True}
+'''
+
+    splitter = RecursiveCharacterTextSplitter.from_language(
+        language=Language.PYTHON,
+        chunk_size=80,
+        chunk_overlap=0,
+    )
+
+    docs = splitter.create_documents([code])
+
+    for index, doc in enumerate(docs):
+        print("doc", index)
+        print(doc.page_content)
+        print("*" * 8)
+
+
+def main():
+    print("RecursiveCharacterTextSplitter:")
+    demo_recursive_character_splitter()
+
+    print("=" * 120)
+    print("MarkdownHeaderTextSplitter:")
+    demo_markdown_header_splitter()
+
+    print("=" * 120)
+    print("PythonCodeTextSplitter:")
+    demo_python_code_splitter()
+
+
+if __name__ == "__main__":
+    main()

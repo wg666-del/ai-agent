@@ -44,3 +44,8 @@ ai-agent-course = "ai_agent_course:main"
 [build-system]
 requires = ["uv_build>=0.12.19,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv.workspace]
+members = [
+    "chunking-demo",
+]
