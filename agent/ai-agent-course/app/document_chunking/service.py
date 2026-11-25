@@ -26,4 +26,26 @@ class DocumentChunkingService:
         chunker = self.factory.create_chunker(config)
 
         return chunker.split(document)
-    
+
+    def split_with_strategy(
+        self,
+        document: ParsedDocument,
+        strategy: ChunkStrategy,
+        chunk_size: int = 500,
+        chunk_overlap: int = 80,
+        min_chunk_size: int = 30,
+    ) -> ChunkResult:
+        config = ChunkConfig(
+            strategy=strategy,
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            min_chunk_size=min_chunk_size,
+        )
+
+        return self.split_document(
+            document=document,
+            config=config,
+        )
+
+
+document_chunking_service = DocumentChunkingService()

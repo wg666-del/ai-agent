@@ -401,7 +401,7 @@ class TableAwareChunker(BaseChunker):
         self,
         document: ParsedDocument,
     ) -> ChunkResult:
-        chunks = list[ChunkDocument] = []
+        chunks: list[ChunkDocument] = []
         chunk_index = 0
         text_buffer: list[str] = []
 

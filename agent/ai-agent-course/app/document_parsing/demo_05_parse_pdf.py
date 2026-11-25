@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import fitz
+import pymupdf as fitz
 
 from app.document_parsing.service import document_parsing_service
 

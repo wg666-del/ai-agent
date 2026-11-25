@@ -12,7 +12,7 @@ from app.document_parsing.schemas import (
 
 from bs4 import BeautifulSoup
 from docx import Document as DocxDocument
-import fitz
+import pymupdf as fitz
 
 
 def build_document_id(
