@@ -59,7 +59,7 @@ class VectorSearchRequest:
 class VectorSearchResponse:
     query: str
     top_k: int
-    results = list[VectorSearchResult]
+    results: list[VectorSearchResult] = field(default_factory=list)
 
 
 @dataclass
