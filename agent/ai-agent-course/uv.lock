@@ -664,14 +664,18 @@ name = "chunking-demo"
 version = "0.1.0"
 source = { editable = "chunking-demo" }
 dependencies = [
+    { name = "langchain-classic" },
     { name = "langchain-core" },
+    { name = "langchain-ollama" },
     { name = "langchain-text-splitters" },
     { name = "tiktoken" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "langchain-classic", specifier = ">=1.0.8" },
     { name = "langchain-core", specifier = ">=1.5.6" },
+    { name = "langchain-ollama", specifier = ">=1.2.0" },
     { name = "langchain-text-splitters", specifier = ">=1.1.3" },
     { name = "tiktoken", specifier = ">=0.14.0" },
 ]
@@ -1409,6 +1413,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/27/b9/893806b89f77e1271fe6e10ce41682ff5fe43d071564e1d8e39dbb5d4d6d/langchain_core-1.5.6.tar.gz", hash = "sha256:b5f73bd9688c457b31ec73657a0ad56948f889fae27acee79286e9c285632ee6", size = 984873, upload-time = "2026-08-17T21:26:35.921Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5d/0a/890504397885c9d1ae45f2e06c3000dd9f4445439602b6a990a88b32c0ac/langchain_core-1.5.6-py3-none-any.whl", hash = "sha256:d6cf37bf695ecc22cddeb8461a684e353190b2ce430d99eb22bc11c0c7c00ea5", size = 567016, upload-time = "2026-08-17T21:26:34.595Z" },
+]
+
+[[package]]
+name = "langchain-ollama"
+version = "1.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "ollama" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/26/90/d9ce5218e10b01088f4d2cc945c2331efd1834dbc22b23ff1bfeacc7619f/langchain_ollama-1.2.0.tar.gz", hash = "sha256:779e1d9c8c74a9bd870f3a464028e14fc29a8b3e54e0cdd14965c6e200009362", size = 131108, upload-time = "2026-11-23T16:15:52.539Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/8d/c14e9c49f1cfc210c9f48e0a84f51c5df1fa92e5a99b9d45915ca5f09e98/langchain_ollama-1.2.0-py3-none-any.whl", hash = "sha256:c0618c6557dd80aeb3a061433a7cb28bd0f45e2762cb4c9793d9542c127874ea", size = 31470, upload-time = "2026-11-23T16:15:51.758Z" },
 ]
 
 [[package]]
@@ -2190,6 +2207,19 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/7a/d8/a1bcc8ba112a627f8ffbdc212a78ce18d3ac07e91a5ca65d27918eee25a1/oauthlib-4.0.0.tar.gz", hash = "sha256:efb274799819440f95b4ab3b818869f1ce9ae26c5beacba0201d1a1b76b54f86", size = 187232, upload-time = "2026-09-28T06:01:18.77Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d9/f4/78229a1066068ca14fc60fb26cf7381cabe4382261392b90e5f9552722d4/oauthlib-4.0.0-py3-none-any.whl", hash = "sha256:624c28c13a0a59cabf9747dfa52af63be3e512a7f2714df16e91b5b3a145e6cd", size = 159715, upload-time = "2026-09-28T06:01:17.008Z" },
+]
+
+[[package]]
+name = "ollama"
+version = "0.6.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b8/97/eeafe65594e4f4b25e443e068ef7d83aa3105b023e12e1c408c38669fc07/ollama-0.6.3.tar.gz", hash = "sha256:41fc49a8095c4a75939c4c1f8582e4d0671692fb6eac2a5a7ede8c9872b67096", size = 56868, upload-time = "2026-09-29T01:26:51.906Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4d/64/87505d9e006461233c21c8e66dc1ecee49c996090584b216abd0dd4a8322/ollama-0.6.3-py3-none-any.whl", hash = "sha256:6a20bc42c1a5f889295d7ec490d35e5132fc31f339561530f43a8abd4dbfe508", size = 16603, upload-time = "2026-09-29T01:26:50.451Z" },
 ]
 
 [[package]]
