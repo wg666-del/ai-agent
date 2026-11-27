@@ -48,4 +48,5 @@ build-backend = "uv_build"
 [tool.uv.workspace]
 members = [
     "chunking-demo",
+    "embedding-vector-demo",
 ]
